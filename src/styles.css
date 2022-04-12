@@ -1,0 +1,233 @@
+html {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+}
+
+@media screen and (max-width: 425px) {
+  .UIContainer {
+    grid-template-areas: "Info Projects";
+    grid-template-rows: 1fr;
+    grid-template-columns: 25vw 36vw;
+  }
+
+  .projectsContainer {
+    justify-content: center;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 70vw;
+    height: 100vh;
+  }
+  
+  .infoContainer {
+    grid-template-rows: min-content 1fr max-content min-content min-content;
+    grid-template-areas: "avatar" "." "time" "reacticon" "battery";
+    grid-row-gap: 0.9em;
+    width: min-content;
+    height: 88vh;
+    padding-top: 0.5em;
+    padding-left: 0.7em;
+  }
+
+  .projectTile {
+    height: auto;
+    width: 66vw;
+    margin-bottom: 1em;
+  }
+
+}
+
+@media screen and (min-width: 425px) {
+  .UIContainer {
+    grid-template-areas: "Info" "Projects";
+    grid-template-rows: 25vh 36vh;
+    grid-template-columns: 1fr;
+  }
+  
+  .projectsContainer {
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding-left: 7.5vw;
+    width: 92.5vw;
+    height: 40vh;
+  }
+  
+  .infoContainer {
+    grid-template-columns: min-content 1fr max-content min-content min-content;
+    grid-template-areas: "avatar . time reacticon battery";
+    grid-column-gap: 0.9em;
+    width: 91.15vw;
+    height: 7vh;
+    padding-top: 5vh;
+    padding-left: 4.425vw;
+  }
+
+  .projectTile {
+    height: auto;
+    width: 35.56vh;
+  }
+
+  .allProjects {
+    margin-left: 8vh;
+    margin-right: 7.9vw;
+  }
+}
+
+.appContainer {
+  margin: 0 !important; 
+	background-color: #2d2d2d;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+}
+
+.UIContainer {
+  display: grid;
+  font-family: "Poppins", sans-serif;
+	width: 100%;
+	height: 100%;
+  color: #eee;
+}
+
+.infoContainer {
+  font-size: 1.6em;
+  display: grid;
+	grid-area: Info;
+}
+
+.projectsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.projectsContainer {
+  display: flex;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  align-items: center;
+  grid-area: Projects;
+}
+
+.avatar {
+  height: 2em;
+  width: 2em;
+  border: 0.13em solid #505050;
+  border-radius: 50%;
+  grid-area: avatar;
+  text-align: center;
+	text-justify: auto;
+	box-shadow: 0px 0px 0.3em rgba(0, 0, 0, 0.4);
+}
+
+.currentTime {
+  flex-shrink: 0;
+  display: flex;
+  grid-area: time;
+}
+
+.time {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.pmam {
+  flex-shrink: 0;
+  align-self: center;
+	margin-left: 0.4em;
+  padding-top: 0.2em;
+  font-size: 0.75em;
+}
+
+.faReact {
+  align-self: center;
+  grid-area: reacticon;
+}
+
+.batteryLife {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: battery;
+	width: 2em;
+}
+
+.batteryLifeOuter {
+  position: absolute;
+  height: 0.5em;
+  width: 1.05em;
+  border: 0.45vh solid #eee;
+}
+
+.batteryLifeInner {
+  position: absolute;
+  height: 0.4em;
+  width: 0.9em;
+  background-color: #eee;
+}
+
+.batteryLifeTerminal {
+  position: absolute;
+  height: 0.25em;
+  width: 0.2em;
+  background-color: #eee;
+  margin-left: 1.3em;
+}
+
+.projectTile {
+  flex-shrink: 0;
+	box-shadow: 0px 0px 1vh rgba(0, 0, 0, 0.4);
+	margin-left: 1.33%;
+}
+
+.allProjects {
+  display: grid;
+	grid-template-columns: 1fr 0.5vh 1fr;
+	grid-template-rows: 1fr 0.5vh 1fr;
+	grid-template-areas: 
+		'one . two'
+		'.   .   .'
+		'three . four';
+	flex-shrink: 0;
+	height: 22.2vh;
+	width: 22.2vh;
+	background-color: #505050;
+	box-shadow: 0px 0px 1vh rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+}
+
+.squareOne {
+  justify-self: end;
+	align-self: end;
+	height: 2.78vh;
+	width: 2.78vh;
+	border: 0.6vh solid #dcdcdc;
+	grid-area: one;
+}
+
+.squareTwo {
+  align-self: end;
+	height: 2.78vh;
+	width: 2.78vh;
+	border: 0.6vh solid #dcdcdc;
+	grid-area: two;
+}
+
+.squareThree {
+  justify-self: end;
+	height: 2.78vh;
+	width: 2.78vh;
+	border: 0.6vh solid #dcdcdc;
+	grid-area: three;
+}
+
+.squareFour {
+  height: 2.78vh;
+	width: 2.78vh;
+	border: 0.6vh solid #dcdcdc;
+	grid-area: four;
+}
