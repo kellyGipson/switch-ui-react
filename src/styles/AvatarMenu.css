@@ -1,0 +1,280 @@
+
+
+@media (max-width: 500px) {
+  .avatarMenuContainer {
+    grid-template-areas: 
+      "aIC aIC"
+      "aSC aSC";
+    grid-template-rows: 6em 1fr;
+  }
+
+  .avatarInfoContainer {
+    grid-template-areas: 
+      "avatarImg avatarInfo . avatarMenu avatarExitButton";
+    grid-template-columns: min-content max-content 1fr min-content min-content;
+    padding-inline: 1em;
+  }
+
+  .avatarNavMenu {
+    display: block !important;
+    width: 1.5em;
+    height: auto;
+    grid-area: avatarMenu;
+  }
+  
+  @keyframes hideLeft {
+    from {transform: translateX(0px);}
+    to {transform: translateX(-120px);}
+  }
+  
+  .hidden-left {
+    animation: hideLeft 0.5s ease-in forwards;
+  }
+  
+  @keyframes showLeft {
+    from {transform: translateX(-120px);}
+    to {transform: translateX(0px);}
+  }
+
+  .show-left {
+    animation: showLeft 0.5s ease-out forwards;
+  }
+  
+  .avatarNav {
+    position: absolute;
+    height: calc(100vh - 6em);
+    top: 6em;
+    left: 0;
+    justify-self: center;
+    flex-direction: column;
+    background-color: #2a2a2a;
+  }
+
+  .avatarNavItem {
+    transform: rotate(90);
+    width: 7em;
+  }
+
+  .avatarInfoHR {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 800px) and (min-width: 501px) {
+  .avatarMenuContainer {
+    grid-template-areas: 
+      "aIC"
+      "aN"
+      "aSC";
+    grid-template-rows: min-content 6em 1fr;
+  }
+
+  .avatarInfoContainer {
+    grid-template-areas: 
+      "avatarImg avatarInfo .  avatarExitButton"
+      "hr hr hr hr";
+    grid-template-columns: min-content 10em 1fr min-content;
+    justify-content: space-around;
+    margin-inline: 1em;
+  }
+  
+  .avatarNav {
+    justify-self: center;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: space-evenly;
+    margin-top: 1em;
+  }
+
+  .avatarNavItem {
+    width: 7em;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  .avatarMenuContainer {
+    grid-template-areas: 
+      "aIC aIC"
+      "aN  aSC";
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: min-content 1fr;
+  }
+
+  .avatarInfoContainer {
+    grid-template-areas: 
+      "avatarImg avatarInfo .  avatarExitButton"
+      "hr hr hr hr";
+    grid-template-columns: min-content max-content 1fr min-content;
+    justify-content: center;
+    margin-inline: 3em;
+  }
+  
+  .avatarNav {
+    flex-direction: column;
+    margin-left: 7vw;
+    margin-right: 1em;
+    margin-top: 1em;
+  }
+
+  .avatarNavHR {
+    width: 100%;
+    height: 1px;
+    background-color: #555;
+  }
+
+  .avatarNavItem.navSectionSelected.hoverNav {
+    transform: translateX(-1.9em) translateY(-0.25em);
+    margin-bottom: 0.5em !important;
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+    padding-right: 1em !important;
+    padding-left: 0.5 !important;
+  }
+  
+  .avatarNavItem.navSectionSelected {
+    transform: translateX(0) !important;
+    margin-bottom: 1em !important;
+  }
+  
+  .avatarNavItem.hoverNav {
+    transform: translateX(-1.5em) translateY(-0.25em) !important;
+    margin-bottom: 0.5em !important;
+    padding-left: 1em;
+  }
+
+  .avatarNavItem {
+    padding-right: 1em;
+    margin-top: 0.5em;
+    width: 16vw;
+  }
+
+  .navSectionSelected {
+    transform: translateX(-1em);
+  }
+}
+
+@keyframes hoverNavAnimation {
+  from {border: 0.25em solid rgb(0, 100, 150);}
+  to {border: 0.25em solid rgb(80, 255, 255);}
+}
+
+.hoverNav {
+  border-radius: 0.2em;
+  box-sizing: border-box;
+  background-color: #222;
+  animation: hoverNavAnimation 0.55s linear infinite alternate;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.navSelected {
+  display: inline;
+  border: 2px solid rgb(0, 255, 255);
+  margin-right: 0.4em;
+}
+
+.navSectionSelected {
+  color: rgb(0, 255, 255);
+}
+
+.avatarMenuContainer {
+  opacity: 0;
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+}
+
+.avatarInfoContainer {
+  grid-area: aIC;
+  display: grid;
+  column-gap: 1em;
+  margin-top: 1em;
+  align-items: center;
+}
+
+.avatarImg {
+  grid-area: avatarImg;
+  height: auto;
+  width: 2em;
+  border-radius: 50%;
+}
+
+.avatarInfo {
+  grid-area: avatarInfo;
+}
+
+.avatarExitButton {
+  grid-area: avatarExitButton;
+  height: 2em;
+  width: auto;
+  cursor: pointer;
+}
+
+.avatarExitButton > path {
+  stroke: white;
+}
+
+.avatarNav {
+  display: flex;
+  align-items: center;
+  grid-area: aN;
+}
+
+.avatarSelectedContent {
+  grid-area: aSC;
+  background-color: #282828;
+}
+
+.avatarInfoHR {
+  grid-area: hr;
+  width: 96vw;
+  height: 2px;
+  background-color: #eee;
+}
+
+.avatarNavItem {
+  margin-bottom: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 0.5em;
+  cursor: pointer;
+}
+
+.avatarContent::-webkit-scrollbar {
+  display: none;
+}
+
+.avatarContent {
+  height: 100%;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.contentHeading {
+  margin-inline: 1em;
+}
+
+.avatarContentHR {
+  height: 1px;
+  background-color: #555;
+  margin-inline: 0.5em;
+}
+
+.contentText {
+  margin-inline: 2em;
+  line-height: 1.75em;
+  letter-spacing: 0.5px;
+}
+
+.contentText > p {
+  z-index: 1020;
+}
+
+.contentText > p > a {
+  text-decoration: none;
+  color: rgb(0, 100, 150);
+  cursor: pointer;
+}

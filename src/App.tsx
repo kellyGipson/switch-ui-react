@@ -1,105 +1,106 @@
-import { useEffect, useState } from 'react'
-import { FaReact } from "react-icons/fa";
+import { useEffect, useState } from "react"
+import MainMenu from "./components/mainMenu"
+import AvatarMenu from "./components/avatarMenu"
 
-import { AppList } from './assets/AppList';
-
-import './styles.css'
+import "./styles/MainMenu.css"
+import "./styles/AvatarMenu.css"
 
 export default function App() {
   
-	const [currentTime, setCurrentTime] = useState('')
-  const [pmAm, setPmAm] = useState('')
+  const getIsMobile = () => window.innerWidth < 501;
 
-  //init current active time
-  useEffect(() => {
-    const date = new Date();
-    let hours: number = date.getHours();
-    let minutes: any = date.getMinutes();
-    if (hours === 12) {
-      setPmAm('PM')
-    } else if (hours > 11 && hours !== 12) {
-      hours = date.getHours() - 12;
-      setPmAm('PM')
-    } else setPmAm('AM')
-    if(minutes < 10) {minutes = `0${minutes}`}
-    setCurrentTime(`${hours} : ${minutes}`)
-    setCurrentTime(`4 : 15`)
-  }, [])
+  // This hook is used to determine if the device is mobile/vertical layout
+  function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(getIsMobile);
+    
+    useEffect(() => {
+      const onResize = () => setIsMobile(getIsMobile());
   
-  //update time every 30 seconds
-  useEffect(() => {
-    setInterval(() => {
-      const date = new Date();
-      let hours = date.getHours();
-      let minutes: any = date.getMinutes();
-      if (hours === 12) {
-        setPmAm('PM')
-      } else if (hours > 11) {
-        hours = date.getHours() - 12;
-        setPmAm('PM')
-      } else setPmAm('AM')
-      if (minutes < 10) minutes = `0${minutes}`
-    setCurrentTime(`${hours} : ${minutes}`)
-		setCurrentTime(`4 : 15`)
-    }, 30000)
-  }, [])
-
-  const [isScrolling, setScrolling] = useState(false);
-	const [scrollLeft, setScrollLeft] = useState(0);
-  const [scrollTop, setScrollTop] = useState(0);
-	const [clientX, setClientX] = useState(0);
-	const [clientY, setClientY] = useState(0);
-
-	// onMouseMove function
-	const handleMouseMovement = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		if(isScrolling) {
-			e.preventDefault()
-			e.currentTarget.scrollLeft = scrollLeft - e.clientX + clientX;
-			e.currentTarget.scrollTop = scrollTop - e.clientY + clientY;
-		}
-		//  = offsetLeft - posX + e.clientX;
-	}
-
-  function handleTileClick(linksrc: string) {
-    window.open(linksrc, "_blank");
+      window.addEventListener("resize", onResize);
+      console.log("Resize");
+  
+      return () => {
+        window.removeEventListener("resize", onResize);
+        console.log("Unmounting useIsMobile");
+      }
+    }, [isMobile]);
+  
+    return isMobile
   }
+
+  function handleHoverOn(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    event.currentTarget.classList.add((event.currentTarget.classList.contains("avatar")) ? "hoverAvatar" : "hover"); 
+  }
+
+  function handleHoverOff(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    event.currentTarget.classList.remove((event.currentTarget.classList.contains("avatar")) ? "hoverAvatar" : "hover");
+  }
+
+  function handleAvatarClick() {
+    document.querySelector(".appContainer")?.classList.add("menuOff");
+    document.querySelector(".avatarMenuContainer")?.classList.remove("d-none");
+    document.querySelector(".avatarMenuContainer")?.classList.add("menuOn");
+  }
+
+  function handleExitAvatarMenu() {
+    document.querySelector(".appContainer")?.classList.remove("menuOff");
+    document.querySelector(".appContainer")?.classList.remove("d-none");
+    document.querySelector(".avatarMenuContainer")?.classList.add("d-none");
+    document.querySelector(".avatarMenuContainer")?.classList.remove("menuOn");
+  }
+
+  function handleHoverNavItemOn(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    e.currentTarget.classList.add("hoverNav");
+  }
+
+  function handleHoverNavItemOff(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    e.currentTarget.classList.remove("hoverNav");
+  }
+
+  const [prevAvatarContent, setPrevAvatarContent]:[any, React.Dispatch<React.SetStateAction<any>>] = useState();
+  const [prevNavClickEvent, setPrevNavClickEvent]:[any, React.Dispatch<React.SetStateAction<any>>] = useState();
+  function handleAvatarNavClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    handleAvatarMenuClick();
+    if(prevNavClickEvent) {
+      prevNavClickEvent.target.children[0].classList.remove("navSelected");
+      prevNavClickEvent.target.classList.remove("navSectionSelected");
+      prevAvatarContent?.classList.add("d-none");
+    }
+    e.currentTarget.children[0].classList.add("navSelected");
+    e.currentTarget.classList.add("navSectionSelected");
+    document.querySelector(`.${e.currentTarget.id}`)?.classList.remove("d-none");
+    setPrevNavClickEvent(e);
+    setPrevAvatarContent(document.querySelector(`.${e.currentTarget.id}`));
+  }
+
+  function handleAvatarMenuClick() {
+    document.querySelector(".avatarNav")?.classList.toggle("hidden-left");
+    document.querySelector(".avatarNav")?.classList.toggle("show-left");
+  }
+
+  // const [allAppsOpen, setAllAppsOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState("");
+  const [pmAm, setPmAm] = useState("");
   
   return (
-		<div className='appContainer'>
-			<div className='UIContainer'>
-        <div className="infoContainer">
-          <img className='avatar' src={require('./assets/avatar.png')} alt="Avatar" />
-          <div className='currentTime'>
-            <div className='time'>{currentTime}</div>
-            <div className='pmam'> {pmAm}</div>
-          </div>
-          <FaReact className='faReact'/>
-          <div className='batteryLife'>
-            <div className='batteryLifeOuter'/>
-            <div className='batteryLifeInner'/>
-            <div className='batteryLifeTerminal'/>
-          </div> 
-        </div>
-        <div className='projectsContainer'
-          onMouseDown={e => {
-            setScrolling(true); 
-            setScrollLeft(e.currentTarget.scrollLeft); 
-            setScrollTop(e.currentTarget.scrollTop); 
-            setClientX(e.clientX);
-            setClientY(e.clientY);
-          }}
-          onMouseUp={e => setScrolling(false)}
-          onMouseMove={(e) => handleMouseMovement(e)}>
-          <img className='projectTile' src={require("./assets/pokedex.webp")} alt={AppList[0].name} onClick={() => handleTileClick(AppList[0].link)} />
-          <img className='projectTile' src={require("./assets/keyboardenthusiast.webp")} alt={AppList[1].name} onClick={() => handleTileClick(AppList[1].link)} />
-          <div className='allProjects' onClick={() => console.log("TODO")}>
-            <div className='squareOne' />
-            <div className='squareTwo' />
-            <div className='squareThree' />
-            <div className='squareFour' />
-          </div>
-        </div>
-			</div>
-		</div>
+    <>
+      <MainMenu 
+        handleHoverOn={handleHoverOn}
+        handleHoverOff={handleHoverOff}
+        currentTime={currentTime}
+        setCurrentTime={setCurrentTime}
+        pmAm={pmAm}
+        setPmAm={setPmAm}
+        handleAvatarClick={handleAvatarClick}
+      />
+      <AvatarMenu
+        useIsMobile={useIsMobile}
+        handleAvatarMenuClick={handleAvatarMenuClick}
+        handleExitAvatarMenu={handleExitAvatarMenu}
+        handleAvatarNavClick={handleAvatarNavClick}
+        handleHoverNavItemOn={handleHoverNavItemOn}
+        handleHoverNavItemOff={handleHoverNavItemOff}
+      />
+    </>
   );
 }
