@@ -10,8 +10,8 @@
 
   .avatarInfoContainer {
     grid-template-areas: 
-      "avatarImg avatarInfo . avatarMenu avatarExitButton";
-    grid-template-columns: min-content max-content 1fr min-content min-content;
+      "avatarMenu avatarImg avatarInfo . avatarExitButton";
+    grid-template-columns: min-content min-content max-content 1fr min-content;
     padding-inline: 1em;
   }
 
