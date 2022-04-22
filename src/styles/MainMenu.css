@@ -30,107 +30,46 @@
   animation: menuOn 0.25s linear 0.25s 1 forwards!important;
 }
 
-html::-webkit-scrollbar {
-  display: none;
+.UIContainer {
+  grid-template-areas: "Info" "Projects" ".";
+  grid-template-rows: 25vh 36vh 1fr;
+  grid-template-columns: 1fr;
 }
 
-html {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  height: min-content;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  height: 100vh;
-  width: 100vw;
+.projectsContainer {
+  flex-direction: row;
+  overflow-x: scroll;
+  padding-left: 7.5vw;
+  width: 92.5vw;
+  height: 40vh;
 }
 
-body {
-  margin: 0;
-  color: #eee;
-	background-color: #2d2d2d;
-}
-
-.footer {
-  color: #444;
-  z-index: 0;
-  display: flex;
-  float: bottom;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  font-size: 1em;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  column-gap: 1em;
-}
-
-.githubIcon {
-  cursor: pointer;
+.hoverBox {
+  width: 35.56vh;
+  height: 35.56vh;
 }
 
 @keyframes hoverNavAnimation {
-  from {border: 0.25em solid rgb(0, 100, 150);}
-  to {border: 0.25em solid rgb(80, 255, 255);}
-}
-
-@keyframes hoverAvatarAnimation {
-  from {border: 0.13em solid rgb(0, 100, 150);}
-  to {border: 0.13em solid rgb(80, 255, 255);}
-}
-
-.hoverAvatar {
-  animation: hoverAvatarAnimation 0.55s linear infinite alternate;
-  border-radius: 50%;
+  from {border: 0.25em solid var(--hover-dark);}
+  to {border: 0.25em solid var(--hover-light);}
 }
 
 .hover {
   animation: hoverNavAnimation 0.55s linear infinite alternate;
   border-radius: 0.2em;
-	margin-left: 1.33vh;
+  margin-left: 0.35rem !important;
+  margin-right: -0.25rem;
 }
 
-  .UIContainer {
-    grid-template-areas: "Info" "Projects" ".";
-    grid-template-rows: 25vh 36vh 1fr;
-    grid-template-columns: 1fr;
-  }
-  
-  .projectsContainer {
-    flex-direction: row;
-    overflow-x: scroll;
-    padding-left: 7.5vw;
-    width: 92.5vw;
-    height: 40vh;
-  }
-  
-  .infoContainer {
-    top: 0;
-    grid-template-columns: min-content 1fr max-content min-content min-content;
-    grid-template-areas: "avatar . time reacticon battery";
-    grid-column-gap: 0.9em;
-    width: 91.15vw;
-    height: 7vh;
-    padding-top: 5vh;
-    padding-left: 4.425vw;
-  }
-
-  .hoverBox {
-    width: 35.56vh;
-    height: 35.56vh;
-  }
-
-  .projectTile {
-    height: auto;
-    width: 35.56vh;
-  }
-
-  .allProjects {
-    margin-left: 8vh;
-    margin-right: 7.9vw;
-    height: 22.2vh;
-    width: 22.2vh;
-  }
+.projectTile {
+  cursor: pointer;
+  flex-shrink: 0;
+  height: auto;
+  width: 35.56vh;
+  margin-left: 0.6rem;
+  padding: 0.1em;
+  box-shadow: 0px 0px 1vh rgba(0, 0, 0, 0.4);
+}
 
 .appContainer {
   margin: 0 !important; 
@@ -147,12 +86,6 @@ body {
 	height: 100%;
 }
 
-.infoContainer {
-  font-size: 1.6em;
-  display: grid;
-	grid-area: Info;
-}
-
 .projectsContainer::-webkit-scrollbar {
   display: none;
 }
@@ -163,124 +96,4 @@ body {
   scrollbar-width: none;
   align-items: center;
   grid-area: Projects;
-}
-
-.avatar {
-  height: 2em;
-  width: 2em;
-  border: 0.13em solid #505050;
-  border-radius: 50%;
-  grid-area: avatar;
-  text-align: center;
-	text-justify: auto;
-	box-shadow: 0px 0px 0.3em rgba(0, 0, 0, 0.4);
-  cursor: pointer;
-}
-
-.currentTime {
-  flex-shrink: 0;
-  display: flex;
-  grid-area: time;
-}
-
-.time {
-  flex-shrink: 0;
-  align-self: center;
-}
-
-.pmam {
-  flex-shrink: 0;
-  align-self: center;
-	margin-left: 0.4em;
-  padding-top: 0.2em;
-  font-size: 0.75em;
-}
-
-.faReact {
-  align-self: center;
-  grid-area: reacticon;
-}
-
-.batteryLife {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  grid-area: battery;
-	width: 1.4em;
-}
-
-.batteryLifeOuter {
-  position: absolute;
-  height: 0.5em;
-  width: 1.05em;
-  border: 0.45vh solid #eee;
-}
-
-.batteryLifeInner {
-  position: absolute;
-  height: 0.4em;
-  width: 0.9em;
-  background-color: #eee;
-}
-
-.batteryLifeTerminal {
-  position: absolute;
-  height: 0.25em;
-  width: 0.2em;
-  background-color: #eee;
-  margin-left: 1.3em;
-}
-
-.projectTile {
-  flex-shrink: 0;
-	box-shadow: 0px 0px 1vh rgba(0, 0, 0, 0.4);
-	margin-left: 1.33vh;
-  padding: 0.1em;
-  cursor: pointer;
-}
-
-.allProjects {
-  display: grid;
-	grid-template-columns: 1fr 0.5vh 1fr;
-	grid-template-rows: 1fr 0.5vh 1fr;
-	grid-template-areas: 
-		'one . two'
-		'.   .   .'
-		'three . four';
-	flex-shrink: 0;
-	background-color: #505050;
-	box-shadow: 0px 0px 1vh rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
-}
-
-.squareOne {
-  justify-self: end;
-	align-self: end;
-	height: 26%;
-	width: 26%;
-	border: 0.6vh solid #dcdcdc;
-	grid-area: one;
-}
-
-.squareTwo {
-  align-self: end;
-	height: 26%;
-	width: 26%;
-	border: 0.6vh solid #dcdcdc;
-	grid-area: two;
-}
-
-.squareThree {
-  justify-self: end;
-	height: 26%;
-	width: 26%;
-	border: 0.6vh solid #dcdcdc;
-	grid-area: three;
-}
-
-.squareFour {
-	height: 26%;
-	width: 26%;
-	border: 0.6vh solid #dcdcdc;
-	grid-area: four;
 }

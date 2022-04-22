@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { AppList } from "../assets/AppList";
-import { FaReact, FaGithub } from 'react-icons/fa'
+
+import InfoContainer from "../components/InfoContainer"
+import AllProjects from "../components/AllProjects"
+import Footer from "../components/Footer"
 
 type propTypes = {
   handleAvatarClick(): void,
@@ -71,73 +74,48 @@ export default function MainMenu({
 		}
 	}
 
-  function handleTileClick(linksrc: string) {
-    window.open(linksrc, "_blank");
+  function handleTileClick(linksrc: string, event: React.MouseEvent<HTMLImageElement, MouseEvent>) {
+    if(clientX === event.clientX && clientY === event.clientY) 
+      window.open(linksrc, "_blank");
   }
 
   function handleUIAnimationEnd(event: React.AnimationEvent<HTMLDivElement>) {
     event.currentTarget.classList.add("d-none");
-    
   }
   
   return (
     <div className='appContainer' onAnimationEnd={(e) => handleUIAnimationEnd(e)}>
       <div className='UIContainer'>
-        <div className="infoContainer">
-          <div>
-            <img className='avatar' 
-              onClick={() => handleAvatarClick()}
-              onMouseEnter={(e) => handleHoverOn(e)} 
-              onMouseLeave={(e) => handleHoverOff(e)}
-              src={require('../assets/avatar.png')} 
-              alt="Avatar" 
-            />
-          </div>
-          <div className='currentTime'>
-            <div className='time'>{currentTime}</div>
-            <div className='pmam'> {pmAm}</div>
-          </div>
-          <FaReact className='faReact'/>
-          <div className='batteryLife'>
-            <div className='batteryLifeOuter'/>
-            <div className='batteryLifeInner'/>
-            <div className='batteryLifeTerminal'/>
-          </div> 
-        </div>
+        <InfoContainer 
+          handleAvatarClick={handleAvatarClick} 
+          handleHoverOn={handleHoverOn} 
+          handleHoverOff={handleHoverOff} 
+          currentTime={currentTime} 
+          pmAm={pmAm}
+        />
         <div className='projectsContainer'
-          onMouseDown={e => {
+          onMouseDown={(e) => {
             setScrolling(true); 
             setScrollLeft(e.currentTarget.scrollLeft); 
             setScrollTop(e.currentTarget.scrollTop); 
             setClientX(e.clientX);
             setClientY(e.clientY);
           }}
-          onMouseUp={e => setScrolling(false)}
+          onMouseUp={(e) => setScrolling(false)}
           onMouseMove={(e) => handleMouseMovement(e)}>
-            <img 
+            {AppList.map((tile, idx) =>
+              <img 
+              key={idx}
               onMouseEnter={(e) => handleHoverOn(e)} 
               onMouseLeave={(e) => handleHoverOff(e)}
               className='projectTile' 
-              onClick={() => handleTileClick(AppList[0].link)} 
-              src={require("../assets/pokedex.webp")} 
-              alt={AppList[0].name} 
+              onClick={(e) => handleTileClick(tile.link, e)} 
+              src={require(`../assets/${tile.img}`)} 
+              alt={tile.name} 
               />
-            <img 
-              onMouseEnter={(e) => handleHoverOn(e)} 
-              onMouseLeave={(e) => handleHoverOff(e)}
-              className='projectTile' 
-              src={require("../assets/keyboardenthusiast.webp")} 
-              alt={AppList[1].name} 
-              onClick={() => handleTileClick(AppList[1].link)} />
-          <div className='allProjects' onClick={() => console.log("TODO")}>
-            <div className='squareOne' />
-            <div className='squareTwo' />
-            <div className='squareThree' />
-            <div className='squareFour' />
-          </div>
-          <footer className="footer">
-            <div>Hand Crafted by Kelly Gipson</div><FaGithub className="githubIcon" onClick={() => window.open("https://github.com/kellyGipson/", "_blank")}/>
-          </footer>
+            )}
+          <AllProjects />
+          <Footer />
         </div>
 			</div>
     </div>

@@ -116,7 +116,7 @@ export default function AvatarMenu({
               <h1 className="contentHeading">Contact</h1>
               <div className="avatarContentHR"></div>
               <article className="contentText">
-                <p>Email: <a href="mailto: thomaskellygipson@gmail.com">thomaskellygipson@gmail.com</a></p>
+                <p>Email: <a href="mailto: kelly@gipsonsoftware.com">kelly@gipsonsoftware.com</a></p>
                 <p>Github: <a target="_blank" rel="noreferrer" href="https://github.com/kellyGipson/">https://github.com/kellyGipson/</a></p>
               </article>
             </article>

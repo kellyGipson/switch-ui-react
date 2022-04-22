@@ -1,32 +1,16 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import MainMenu from "./components/mainMenu"
 import AvatarMenu from "./components/avatarMenu"
+import useIsMobile from "./hooks/useIsMobile"
 
+import "./App.css"
 import "./styles/MainMenu.css"
 import "./styles/AvatarMenu.css"
+import "./styles/Footer.css"
+import "./styles/AllProjects.css"
+import "./styles/InfoContainer.css"
 
 export default function App() {
-  
-  const getIsMobile = () => window.innerWidth < 501;
-
-  // This hook is used to determine if the device is mobile/vertical layout
-  function useIsMobile() {
-    const [isMobile, setIsMobile] = useState(getIsMobile);
-    
-    useEffect(() => {
-      const onResize = () => setIsMobile(getIsMobile());
-  
-      window.addEventListener("resize", onResize);
-      console.log("Resize");
-  
-      return () => {
-        window.removeEventListener("resize", onResize);
-        console.log("Unmounting useIsMobile");
-      }
-    }, [isMobile]);
-  
-    return isMobile
-  }
 
   function handleHoverOn(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     event.currentTarget.classList.add((event.currentTarget.classList.contains("avatar")) ? "hoverAvatar" : "hover"); 

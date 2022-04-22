@@ -1,0 +1,59 @@
+@keyframes hoverAllProjectsAnimation {
+  from {border: 0.25em solid var(--hover-dark);}
+  to {border: 0.25em solid var(--hover-light);}
+}
+
+.allProjectsHover {
+  animation: hoverAllProjectsAnimation 0.55s linear infinite alternate;
+  margin-left: 3.35rem !important;
+}
+
+.allProjects {
+  display: grid;
+	grid-template-columns: 1fr 0.5vh 1fr;
+	grid-template-rows: 1fr 0.5vh 1fr;
+	grid-template-areas: 
+		'one . two'
+		'.   .   .'
+		'three . four';
+	flex-shrink: 0;
+	background-color: #505050;
+	box-shadow: 0px 0px 1vh rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  margin-left: 3.6rem;
+  margin-right: 7.9vw;
+  height: 22.2vh;
+  width: 22.2vh;
+}
+
+.squareOne {
+  justify-self: end;
+	align-self: end;
+	height: 26%;
+	width: 26%;
+	border: 0.6vh solid #dcdcdc;
+	grid-area: one;
+}
+
+.squareTwo {
+  align-self: end;
+	height: 26%;
+	width: 26%;
+	border: 0.6vh solid #dcdcdc;
+	grid-area: two;
+}
+
+.squareThree {
+  justify-self: end;
+	height: 26%;
+	width: 26%;
+	border: 0.6vh solid #dcdcdc;
+	grid-area: three;
+}
+
+.squareFour {
+	height: 26%;
+	width: 26%;
+	border: 0.6vh solid #dcdcdc;
+	grid-area: four;
+}

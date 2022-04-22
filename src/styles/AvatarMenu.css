@@ -153,9 +153,9 @@
   }
 }
 
-@keyframes hoverNavAnimation {
-  from {border: 0.25em solid rgb(0, 100, 150);}
-  to {border: 0.25em solid rgb(80, 255, 255);}
+@keyframes hoverAvatarAnimation {
+  from {border: 0.13em solid var(--hover-dark);}
+  to {border: 0.13em solid var(--hover-light);}
 }
 
 .hoverNav {
